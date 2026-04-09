@@ -1,0 +1,166 @@
+/* heading*/
+.heading{
+    width: 870px;
+    background-color:#2626a6;
+    color: aliceblue;
+    font-size: 45px;
+    text-align:justify;
+    margin: 10px;
+    border: 10px;
+    border-radius: 20px;
+    text-align: center;
+}
+.image{
+    margin: 0%;
+    border: 0%;
+}
+.container{
+    display: flex;
+}
+/* Sidebar styling */
+.leftsidebar {
+    width: 130px;
+    background-color: #2626a6;
+    color: white;
+    padding: 20px;
+    height: 320px;
+    border-radius: 20px;
+    margin-left: 20px;
+}
+
+.leftsidebar h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.leftsidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.leftsidebar ul li {
+    margin: 15px 0;
+}
+
+.leftsidebar ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.leftsidebar ul li a:hover {
+    background-color: #6f6ff0;
+}
+
+.leftsidebar{
+position:absolute;
+    left: 0;
+    top: 160px;
+}
+
+.rightsidebar {
+    width: 130px;
+    background-color: #2626a6;
+    color: white;
+    padding: 20px;
+    height: 320px;
+    border-radius: 20px;
+    margin-left: 20px;
+}
+
+.rightsidebar h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.rightsidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.rightsidebar ul li {
+    margin: 15px 0;
+}
+
+.rightsidebar ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.rightsidebar ul li a:hover {
+    background-color: #6f6ff0;
+}
+
+.rightsidebar{
+position:absolute;
+    right: 0;
+    top: 160px;
+}
+
+
+/* Main content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.main-content {
+    margin-left: 10px;
+}
+
+.slider {
+    width: 440px;
+    height: 320px;
+    margin: 20px auto;
+    overflow: hidden;
+    border: 3px solid #333;
+    border-radius: 10px;
+}
+
+.slides {
+    display: flex;
+    width: 100%;
+    animation: slide 12s infinite;
+}
+
+.slides img {
+    width: 100%;
+    height: 400px;
+    object-fit:cover;
+}
+
+/* Animation */
+   @keyframes slide {
+    0%   {margin-left: 100%;}
+    20%  { margin-left: 0%; }
+    40%  { margin-left: -100%; }
+    60%  { margin-left: -200%; }
+    80%  { margin-left: -300%; }
+    100% { margin-left: -400%; }
+}
+
+.footer{
+    display:flex;
+    background-color:#2626a6;
+    margin: 20px;
+    border:10px;
+    border-radius: 20px;
+    color:white;
+    height: 150px;
+}
+
+.footer :hover{
+    color:white;
+}
+.placement{
+    display: block;
+}
+.placement img{
+    width: 900px;
+    height: 400px;
+}
