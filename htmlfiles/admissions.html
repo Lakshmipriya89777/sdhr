@@ -67,13 +67,13 @@
 
     // optional AI reply (simple rule-based if no API)
     setTimeout(async () => {
-      await addDoc(chatRef, {
-        name: "AI Assistant",
-        message: generateReply(message),
-        type: "ai",
-        time: new Date()
-      });
-    }, 1000);
+  await addDoc(chatRef, {
+    name: "AI Assistant",
+    message: generateReply(message),
+    type: "ai",
+    time: new Date()
+  });
+}, 1000);
 
     document.getElementById("message").value = "";
   };
