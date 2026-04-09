@@ -2,10 +2,10 @@
 <html>
 <head>
   <title>Admission Enquiry Chat</title>
-  <link rel="stylesheet" href="../css/admission.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  body {
+
+  <style>
+    body {
       font-family: Arial;
       background: #f2f2f2;
       margin: 0;
@@ -13,10 +13,9 @@
     }
 
     .container {
-      width: 400px;
+      width: 420px;
       max-width: 95%;
-      margin: auto;
-      margin-top: 20px;
+      margin: 20px auto;
       background: white;
       padding: 15px;
       border-radius: 10px;
@@ -27,13 +26,19 @@
       padding: 10px;
       margin-top: 10px;
       box-sizing: border-box;
+      font-size: 14px;
     }
 
     button {
-      background: green;
+      background: #2e7d32;
       color: white;
       border: none;
       cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background: #1b5e20;
     }
 
     #chatBox {
@@ -45,7 +50,27 @@
       border-radius: 10px;
       background: #fafafa;
     }
-</style>
+
+    .msg {
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 80%;
+      clear: both;
+    }
+
+    .user {
+      background: #dbefff;
+      float: right;
+      text-align: right;
+    }
+
+    .ai {
+      background: #d4f8d4;
+      float: left;
+      text-align: left;
+    }
+  </style>
 </head>
 
 <body>
@@ -69,74 +94,78 @@
     addDoc,
     onSnapshot,
     query,
-    orderBy
+    orderBy,
+    serverTimestamp
   } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  // 🔥 Firebase config
+  // 🔥 Firebase Config
   const firebaseConfig = {
-  apiKey: "AIzaSyAgDI3b7xS11qYvC9oQKFWbYTAKJdVHffk",
-  authDomain: "sdhr-chat.firebaseapp.com",
-  projectId: "sdhr-chat",
-  storageBucket: "sdhr-chat.firebasestorage.app",
-  messagingSenderId: "58527401520",
-  appId: "1:58527401520:web:5945df00f201b6eecf0ff5",
-  measurementId: "G-LGHTVMF0J7"
-};
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_ID",
+    appId: "YOUR_APP_ID"
+  };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
   const chatRef = collection(db, "admission_enquiries");
   const q = query(chatRef, orderBy("time", "asc"));
-  import { serverTimestamp } from "firebase/firestore";
-  time: serverTimestamp()
 
   // 💬 SEND MESSAGE
   window.sendMessage = async function () {
-    let name = document.getElementById("name").value;
-    let message = document.getElementById("message").value;
+    let name = document.getElementById("name").value.trim();
+    let message = document.getElementById("message").value.trim();
 
     if (!name || !message) {
-      alert("Please fill all fields");
+      alert("Please enter all fields");
       return;
     }
-    console.log("Message sent");
 
-    // user message
+    // USER MESSAGE
     await addDoc(chatRef, {
       name,
       message,
       type: "user",
-      time: new Date()
+      time: serverTimestamp()
     });
 
-    // optional AI reply (simple rule-based if no API)
-    setTimeout(async () => {
-  await addDoc(chatRef, {
-    name: "AI Assistant",
-    message: generateReply(message),
-    type: "ai",
-    time: new Date()
-  });
-}, 1000);
-
     document.getElementById("message").value = "";
+
+    // 🤖 AI RESPONSE (auto)
+    setTimeout(async () => {
+      await addDoc(chatRef, {
+        name: "AI Assistant",
+        message: generateReply(message),
+        type: "ai",
+        time: serverTimestamp()
+      });
+    }, 800);
   };
 
-  // 🤖 Simple AI logic (you can replace with OpenAI later)
+  // 🤖 AI LOGIC
   function generateReply(msg) {
     msg = msg.toLowerCase();
 
-    if (msg.includes("fee")) return "Our college fee details will be shared during admission process.";
-    if (msg.includes("course")) return "We offer B.Com, B.Sc, B.A, and PG courses.";
-    if (msg.includes("admission")) return "Admissions are open now. Please visit college office.";
-    if (msg.includes("hello")) return "Hello! How can I help you with admissions?";
-    
-    return "Thank you for your enquiry. Our team will contact you soon.";
+    if (msg.includes("fee"))
+      return "💰 Fee details will be shared during admission. Please contact office.";
+
+    if (msg.includes("course"))
+      return "📚 We offer B.Com, B.Sc, B.A and PG courses.";
+
+    if (msg.includes("admission"))
+      return "🎓 Admissions are open now. You can apply in college office.";
+
+    if (msg.includes("hello"))
+      return "👋 Hello! How can I help you with admissions?";
+
+    return "📌 Thank you for your enquiry. Our team will contact you soon.";
   }
 
-  // 🔄 REAL-TIME CHAT
+  // 🔄 REAL TIME CHAT
   onSnapshot(q, (snapshot) => {
     let chatBox = document.getElementById("chatBox");
     chatBox.innerHTML = "";
@@ -144,21 +173,13 @@ const analytics = getAnalytics(app);
     snapshot.forEach((doc) => {
       let data = doc.data();
 
-      let bg = data.type === "ai" ? "#d4f8d4" : "#dbefff";
-      let align = data.type === "ai" ? "left" : "right";
+      let div = document.createElement("div");
+      div.classList.add("msg");
+      div.classList.add(data.type === "ai" ? "ai" : "user");
 
-      chatBox.innerHTML += `
-        <div style="
-          margin:10px 0;
-          padding:10px;
-          background:${bg};
-          border-radius:10px;
-          text-align:${align};
-        ">
-          <b>${data.name}</b><br>
-          ${data.message}
-        </div>
-      `;
+      div.innerHTML = `<b>${data.name}</b><br>${data.message}`;
+
+      chatBox.appendChild(div);
     });
 
     chatBox.scrollTop = chatBox.scrollHeight;
