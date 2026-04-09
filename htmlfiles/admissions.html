@@ -62,25 +62,32 @@
   };
 
   // ⭐ THIS IS WHERE YOUR onSnapshot CODE GOES
-  const q = query(collection(db, "admission_enquiries"), orderBy("time"));
-
   onSnapshot(q, (snapshot) => {
-    let chatBox = document.getElementById("chatBox");
-    chatBox.innerHTML = "";
+  let chatBox = document.getElementById("chatBox");
+  chatBox.innerHTML = "";
 
-    snapshot.forEach((doc) => {
-      let data = doc.data();
+  snapshot.forEach((doc) => {
+    let data = doc.data();
 
-      chatBox.innerHTML += `
-        <div style="margin:10px 0;padding:10px;background:#e1f5fe;border-radius:10px;">
-          <b>${data.name}</b><br>
-          ${data.message}
-        </div>
-      `;
-    });
+    let bg = data.type === "ai" ? "#d1ffd6" : "#e1f5fe";
+    let align = data.type === "ai" ? "left" : "right";
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+    chatBox.innerHTML += `
+      <div style="
+        margin:10px 0;
+        padding:10px;
+        background:${bg};
+        border-radius:10px;
+        text-align:${align};
+      ">
+        <b>${data.name}</b><br>
+        ${data.message}
+      </div>
+    `;
   });
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+});
 </script>
 </body>
 </html>
