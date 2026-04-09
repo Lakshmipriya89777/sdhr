@@ -88,7 +88,9 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
   const chatRef = collection(db, "admission_enquiries");
-  const q = query(chatRef, orderBy("time"));
+  const q = query(chatRef, orderBy("time", "asc"));
+  import { serverTimestamp } from "firebase/firestore";
+  time: serverTimestamp()
 
   // 💬 SEND MESSAGE
   window.sendMessage = async function () {
@@ -99,6 +101,7 @@ const analytics = getAnalytics(app);
       alert("Please fill all fields");
       return;
     }
+    console.log("Message sent");
 
     // user message
     await addDoc(chatRef, {
