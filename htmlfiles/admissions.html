@@ -50,16 +50,33 @@
   const db = getFirestore(app);
 
   // ✅ SEND MESSAGE FUNCTION
-  window.sendMessage = async function () {
-    let name = document.getElementById("name").value;
-    let message = document.getElementById("message").value;
+ window.sendMessage = async function () {
+  let name = document.getElementById("name").value;
+  let message = document.getElementById("message").value;
 
-    await addDoc(collection(db, "admission_enquiries"), {
-      name,
-      message,
-      time: new Date()
-    });
-  };
+  if (!message) return;
+
+  // 1. Save user message
+  await addDoc(collection(db, "admission_enquiries"), {
+    name,
+    message,
+    type: "user",
+    time: new Date()
+  });
+
+  // 2. Get AI reply
+  let aiReply = await getAIResponse(message);
+
+  // 3. Save AI message
+  await addDoc(collection(db, "admission_enquiries"), {
+    name: "AI Assistant",
+    message: aiReply,
+    type: "ai",
+    time: new Date()
+  });
+
+  document.getElementById("message").value = "";
+};
 
   // ⭐ THIS IS WHERE YOUR onSnapshot CODE GOES
   onSnapshot(q, (snapshot) => {
