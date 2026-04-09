@@ -27,65 +27,60 @@
   </div>
 
   <script type="module">
-    // Import Firebase modules
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import {
-      getFirestore,
-      collection,
-      addDoc,
-      onSnapshot,
-      query,
-      orderBy
-    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    query,
+    orderBy
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    // Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyAgDI3b7xS11qYvC9oQKFWbYTAKJdVHffk",
-      authDomain: "sdhr-chat.firebaseapp.com",
-      projectId: "sdhr-chat",
-      storageBucket: "sdhr-chat.appspot.com",
-      messagingSenderId: "58527401520",
-      appId: "1:58527401520:web:5945df00f201b6eecf0ff5",
-      measurementId: "G-LGHTVMF0J7"
-    };
+  const firebaseConfig = {
+    apiKey: "...",
+    authDomain: "...",
+    projectId: "...",
+    storageBucket: "...",
+    messagingSenderId: "...",
+    appId: "..."
+  };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-    // Send message to Firestore
-    window.sendMessage = async function () {
-      let name = document.getElementById("name").value;
-      let message = document.getElementById("message").value;
+  // ✅ SEND MESSAGE FUNCTION
+  window.sendMessage = async function () {
+    let name = document.getElementById("name").value;
+    let message = document.getElementById("message").value;
 
-      if (name === "" || message === "") {
-        alert("Please fill all fields");
-        return;
-      }
-
-      await addDoc(collection(db, "admission_enquiries"), {
-        name: name,
-        message: message,
-        time: new Date()
-      });
-
-      document.getElementById("message").value = "";
-    };
-
-    // Real-time chat display
-    const q = query(collection(db, "admission_enquiries"), orderBy("time"));
-
-    onSnapshot(q, (snapshot) => {
-      let chatBox = document.getElementById("chatBox");
-      chatBox.innerHTML = "";
-
-      snapshot.forEach((doc) => {
-        let data = doc.data();
-        chatBox.innerHTML += `
-          <p><b>${data.name}:</b> ${data.message}</p>
-        `;
-      });
+    await addDoc(collection(db, "admission_enquiries"), {
+      name,
+      message,
+      time: new Date()
     });
-  </script>
+  };
+
+  // ⭐ THIS IS WHERE YOUR onSnapshot CODE GOES
+  const q = query(collection(db, "admission_enquiries"), orderBy("time"));
+
+  onSnapshot(q, (snapshot) => {
+    let chatBox = document.getElementById("chatBox");
+    chatBox.innerHTML = "";
+
+    snapshot.forEach((doc) => {
+      let data = doc.data();
+
+      chatBox.innerHTML += `
+        <div style="margin:10px 0;padding:10px;background:#e1f5fe;border-radius:10px;">
+          <b>${data.name}</b><br>
+          ${data.message}
+        </div>
+      `;
+    });
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+  });
+</script>
 </body>
 </html>
