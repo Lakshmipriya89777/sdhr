@@ -1,8 +1,109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <title>FST</title>
-    </head>
-    <body>
-    </body>
+  <head>
+    <title>B.com</title>
+    <style>
+      .hero {
+        height: 400px;
+        background: url("../images/fst.png") center/cover no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .hero h1,
+      .hero p {
+        position: relative;
+        z-index: 1;
+      }
+      .details {
+        display: flex;
+        gap: 20px;
+        margin: 20px;
+      }
+
+      .card {
+        flex: 1;
+        background: #b269c0;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .cta {
+        text-align: center;
+        padding: 30px;
+        background: #2e0857;
+        color: white;
+      }
+
+      .cta a {
+        display: inline-block;
+        margin-top: 10px;
+        background: white;
+        color: #25d366;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <h1>Food Science & Technology (FST)</h1>
+      <p>
+        “Explore the science behind food and innovate for a healthier tomorrow.”
+      </p>
+    </div>
+    <div class="container">
+      <h2>About the Course</h2>
+      <p>
+        This course is offered to the eligible candidates who want to become
+        professionals in corporate management. It provides exposure to the
+        candidates in the fields of commerce, business and administration. The
+        students who have graduated in BCom are eligible for Masters in Business
+        administration. The BCom graduates are eligible for varied jobs in
+        administration, sales and marketing, Human resources, Finance etc., in
+        both public as well as in private sectors based on their area of
+        interests.
+      </p>
+    </div>
+    <div class="details">
+      <div class="card">
+        <h3>Duration</h3>
+        <p>3 Years</p>
+      </div>
+
+      <div class="card">
+        <h3>Eligibility</h3>
+        <p>
+          Aspirants must have passed 10+2 from any stream with English as a
+          subject with minimum 45% to 55% marks in aggregate and seat will be
+          allotted on merit basis.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Fees</h3>
+        <p>₹30,000 / year</p>
+      </div>
+    </div>
+    <div class="cta">
+      <h2>Interested in this course?</h2>
+      <a href="https://wa.me/91XXXXXXXXXX" target="_blank"> Chat with us </a>
+    </div>
+  </body>
 </html>
