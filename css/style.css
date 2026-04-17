@@ -68,6 +68,7 @@
     padding: 20px;
     height: 350px;
     border-radius: 20px;
+    border-left: 50px;
     margin-left: 20px;
 }
 
@@ -115,7 +116,7 @@
 
 .slider {
     width: 440px;
-    height: 410px;
+    height: 400px;
     margin: 20px auto;
     overflow: hidden;
     border: 3px solid #333;
