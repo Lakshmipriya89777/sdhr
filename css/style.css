@@ -3,7 +3,7 @@
     width: 1325px;
     background-color:#2626a6;
     color: aliceblue;
-    font-size: 45px;
+    font-size: 50px;
     text-align:justify;
     margin: 10px;
     border: 10px;
@@ -19,7 +19,7 @@
 }
 /* Sidebar styling */
 .leftsidebar {
-    width: 130px;
+    width: 150px;
     background-color: #2626a6;
     color: white;
     padding: 20px;
@@ -61,7 +61,7 @@ position:absolute;
 }
 
 .rightsidebar {
-    width: 130px;
+    width: 150px;
     background-color: #2626a6;
     color: white;
     padding: 20px;
@@ -114,8 +114,8 @@ position:absolute;
 }
 
 .slider {
-    width: 440px;
-    height: 320px;
+    width: 500px;
+    height: 400px;
     margin: 20px auto;
     overflow: hidden;
     border: 3px solid #333;
