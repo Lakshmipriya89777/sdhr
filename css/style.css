@@ -57,7 +57,7 @@
 .leftsidebar{
 position:absolute;
     left: 0;
-    top: 160px;
+    top: 200px;
 }
 
 .rightsidebar {
@@ -99,7 +99,7 @@ position:absolute;
 .rightsidebar{
 position:absolute;
     right: 0;
-    top: 160px;
+    top: 200px;
 }
 
 
@@ -136,12 +136,12 @@ position:absolute;
 
 /* Animation */
    @keyframes slide {
-    0%   {margin-left: 100%;}
-    20%  { margin-left: 0%; }
-    40%  { margin-left: -100%; }
-    60%  { margin-left: -200%; }
-    80%  { margin-left: -300%; }
-    100% { margin-left: -400%; }
+    0%   {margin-left: 0%;}
+    20%  { margin-left: -100%; }
+    40%  { margin-left: -200%; }
+    60%  { margin-left: -300%; }
+    80%  { margin-left: -400%; }
+    100% { margin-left: -500%; }
 }
 
 .footer{
