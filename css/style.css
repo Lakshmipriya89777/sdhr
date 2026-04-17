@@ -113,8 +113,8 @@
 }
 
 .slider {
-    width: 500px;
-    height: 400px;
+    width: 400px;
+    height: 500px;
     margin: 20px auto;
     overflow: hidden;
     border: 3px solid #333;
